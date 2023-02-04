@@ -4,11 +4,13 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.flourenco.fibonacci.core.storage.database.converters.LocalDateTimeConverter
-import com.flourenco.fibonacci.core.storage.database.dao.FibonacciDao
-import com.flourenco.fibonacci.core.storage.database.entity.FibonacciEntity
+import com.flourenco.fibonacci.core.storage.database.dao.CalculatedFibonacciDao
+import com.flourenco.fibonacci.core.storage.database.dao.FibonacciEntryDao
+import com.flourenco.fibonacci.core.storage.database.entity.CalculatedFibonacciEntity
+import com.flourenco.fibonacci.core.storage.database.entity.FibonacciEntryEntity
 
 @Database(
-    entities = [FibonacciEntity::class],
+    entities = [FibonacciEntryEntity::class, CalculatedFibonacciEntity::class],
     version = 1,
     exportSchema = false
 )
@@ -16,5 +18,6 @@ import com.flourenco.fibonacci.core.storage.database.entity.FibonacciEntity
     LocalDateTimeConverter::class
 )
 abstract class FibonacciDatabase : RoomDatabase() {
-    abstract val fibonacciDao: FibonacciDao
+    abstract val fibonacciEntryDao: FibonacciEntryDao
+    abstract val calculatedFibonacciDao: CalculatedFibonacciDao
 }

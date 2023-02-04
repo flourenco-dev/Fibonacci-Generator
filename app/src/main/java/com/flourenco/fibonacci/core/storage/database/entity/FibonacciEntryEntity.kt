@@ -5,7 +5,8 @@ import androidx.room.PrimaryKey
 import org.threeten.bp.LocalDateTime
 
 @Entity
-data class FibonacciEntity(
+data class FibonacciEntryEntity(
     @PrimaryKey val number: Int,
+    val fibonacciValue: Int,
     val entryTime: LocalDateTime
 )

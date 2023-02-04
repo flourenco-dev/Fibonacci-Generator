@@ -7,7 +7,8 @@ import com.flourenco.fibonacci.core.RepositoryImpl
 import com.flourenco.fibonacci.core.storage.StorageHelper
 import com.flourenco.fibonacci.core.storage.StorageHelperImpl
 import com.flourenco.fibonacci.core.storage.database.FibonacciDatabase
-import com.flourenco.fibonacci.core.storage.database.dao.FibonacciDao
+import com.flourenco.fibonacci.core.storage.database.dao.CalculatedFibonacciDao
+import com.flourenco.fibonacci.core.storage.database.dao.FibonacciEntryDao
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -34,8 +35,13 @@ abstract class StorageModule {
 @Module
 class DatabaseModule {
     @Provides
-    fun providesFibonacciDao(fibonacciDatabase: FibonacciDatabase): FibonacciDao =
-        fibonacciDatabase.fibonacciDao
+    fun providesFibonacciEntryDao(fibonacciDatabase: FibonacciDatabase): FibonacciEntryDao =
+        fibonacciDatabase.fibonacciEntryDao
+
+    @Provides
+    fun providesCalculatedFibonacciDao(
+        fibonacciDatabase: FibonacciDatabase
+    ): CalculatedFibonacciDao = fibonacciDatabase.calculatedFibonacciDao
 
     @Provides
     @Singleton
