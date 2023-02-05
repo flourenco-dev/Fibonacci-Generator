@@ -7,7 +7,7 @@ import org.threeten.bp.LocalDateTime
 
 @Entity
 data class FibonacciEntryEntity(
-    @PrimaryKey val number: Int,
+    val number: Int,
     val fibonacciValue: BigInteger,
-    val entryTime: LocalDateTime
+    @PrimaryKey val entryTime: LocalDateTime
 )

@@ -50,11 +50,11 @@ class RepositoryImpl @Inject constructor(private val storageHelper: StorageHelpe
         }
     }
 
-    // Limiting the order number to 500 to avoid to big Fibonacci results
+    // Limiting the order number to 250 to avoid to big Fibonacci results
     // Feel free to increase max order number, i.e to 10000, to test performance be aware that the
     // Fibonacci result maybe bigger than the visible cell.
     // To make the app have a better look reduce the limit to 75
-    private fun getRandomInt(): Int = (0..500).random()
+    private fun getRandomInt(): Int = (0..250).random()
 
     private suspend fun getFibonacciValueForNumberAsync(number: Int): Deferred<BigInteger> {
         Timber.d("Fibonacci for $number")
