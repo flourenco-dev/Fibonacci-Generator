@@ -85,6 +85,16 @@ dependencies {
     // Dependency Injection
     implementation "com.google.dagger:hilt-android:$hiltVersion"
     kapt "com.google.dagger:hilt-compiler:$hiltVersion"
+
+    // Tests
+    testImplementation "androidx.test.ext:junit:$androidJunitVersion"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:$mockitoVersion"
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion") {
+        exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
+    }
+    testImplementation ("org.threeten:threetenbp:$threetenTestVersion"){
+        exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
+    }
 }
 
 kapt {

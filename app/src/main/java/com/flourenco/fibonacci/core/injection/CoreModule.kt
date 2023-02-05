@@ -4,6 +4,10 @@ import android.content.Context
 import androidx.room.Room
 import com.flourenco.fibonacci.core.Repository
 import com.flourenco.fibonacci.core.RepositoryImpl
+import com.flourenco.fibonacci.core.calculator.FibonacciCalculator
+import com.flourenco.fibonacci.core.calculator.FibonacciCalculatorImpl
+import com.flourenco.fibonacci.core.dateTime.DateTimeHelper
+import com.flourenco.fibonacci.core.dateTime.DateTimeHelperImpl
 import com.flourenco.fibonacci.core.storage.StorageHelper
 import com.flourenco.fibonacci.core.storage.StorageHelperImpl
 import com.flourenco.fibonacci.core.storage.database.FibonacciDatabase
@@ -28,7 +32,7 @@ abstract class RepositoryModule {
 @Module
 abstract class StorageModule {
     @Binds
-    abstract fun providesStorage(storageHelperImpl: StorageHelperImpl): StorageHelper
+    abstract fun providesStorageHelper(storageHelperImpl: StorageHelperImpl): StorageHelper
 }
 
 @InstallIn(SingletonComponent::class)
@@ -51,5 +55,23 @@ class DatabaseModule {
             klass = FibonacciDatabase::class.java,
             name = "Fibonacci App"
         ).build()
+}
+
+@InstallIn(SingletonComponent::class)
+@Module
+abstract class CalculatorModule {
+    @Binds
+    abstract fun providesStorageFibonacciCalculator(
+        fibonacciCalculatorImpl: FibonacciCalculatorImpl
+    ): FibonacciCalculator
+}
+
+@InstallIn(SingletonComponent::class)
+@Module
+abstract class DateTimeModule {
+    @Binds
+    abstract fun providesDateTimeHelper(
+        dateTimeHelperImpl: DateTimeHelperImpl
+    ): DateTimeHelper
 }
 
