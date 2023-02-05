@@ -1,7 +1,10 @@
 # Fibonacci-Generator
 An Android app to generate Fibonacci sequence values while using Kotlin, Hilt, Room and Compose
+Dark Mode |  Light Mode
+:-------------------------:|:-------------------------:
+![Screenshot_20230205_012733_Fibonacci](https://user-images.githubusercontent.com/39101307/216842154-9fe9e62d-bedc-492c-b392-f18c56fe4358.jpg)   |  ![Screenshot_20230205_193132_Fibonacci](https://user-images.githubusercontent.com/39101307/216842168-6505e9e5-9d8e-4bac-ab40-ac102e02eda9.jpg)
 
-## Composition
+## Components
 In this project the idea is to generate a value from the Fibonacci sequence using a random order number.
 It was assumed an interval of 0 to 250 for the order number but the performance of the app can be tested with other limits, like 10000.
 
