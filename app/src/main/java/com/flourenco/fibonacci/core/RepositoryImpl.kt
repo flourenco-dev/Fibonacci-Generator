@@ -5,6 +5,7 @@ import com.flourenco.fibonacci.core.storage.database.entity.CalculatedFibonacciE
 import com.flourenco.fibonacci.core.storage.database.entity.FibonacciEntryEntity
 import com.flourenco.fibonacci.exception.AddFibonacciToDatabaseException
 import com.flourenco.fibonacci.model.FibonacciEntry
+import java.math.BigInteger
 import javax.inject.Inject
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Deferred
@@ -49,48 +50,25 @@ class RepositoryImpl @Inject constructor(private val storageHelper: StorageHelpe
         }
     }
 
-    // Limiting the order number to 75 to allow the Fibonacci result to be stored in a Long
+    // Limiting the order number to 500 to avoid to big Fibonacci results
     // Feel free to increase max order number, i.e to 10000, to test performance be aware that the
-    // Fibonacci result maybe wrong due to not being able to represent it in a Long
-    private fun getRandomInt(): Int = (0..75).random()
+    // Fibonacci result maybe bigger than the visible cell.
+    // To make the app have a better look reduce the limit to 75
+    private fun getRandomInt(): Int = (0..500).random()
 
-    private suspend fun getFibonacciValueForNumber(number: Int): Long =
-        withContext(Dispatchers.IO) {
-            Timber.d("Fibonacci for $number")
-            when {
-                number == 0 -> 0L
-                number == 1 -> 1L
-                storageHelper.hasCalculatedFibonacciForNumber(number) -> {
-                    storageHelper.getCalculatedFibonacciForNumber(number).fibonacciValue
-                }
-                else -> {
-                    (getFibonacciValueForNumber(number - 1) +
-                            getFibonacciValueForNumber(number - 2)).also {
-                        // Store calculated value to allow faster calculations
-                        storageHelper.addCalculatedFibonacci(
-                            CalculatedFibonacciEntity(
-                                calculatedNumber = number,
-                                fibonacciValue = it
-                            )
-                        )
-                    }
-                }
-            }
-        }
-
-    private suspend fun getFibonacciValueForNumberAsync(number: Int): Deferred<Long> {
+    private suspend fun getFibonacciValueForNumberAsync(number: Int): Deferred<BigInteger> {
         Timber.d("Fibonacci for $number")
-        val deferredFibonacciValue = CompletableDeferred<Long>()
+        val deferredFibonacciValue = CompletableDeferred<BigInteger>()
         withContext(Dispatchers.IO) {
             val fibonacciValue = when {
-                number == 0 -> 0L
-                number == 1 -> 1L
+                number == 0 -> BigInteger("0")
+                number == 1 -> BigInteger("1")
                 storageHelper.hasCalculatedFibonacciForNumber(number) -> {
                     storageHelper.getCalculatedFibonacciForNumber(number).fibonacciValue
                 }
                 else -> {
-                    (getFibonacciValueForNumberAsync(number - 1).await() +
-                            getFibonacciValueForNumberAsync(number - 2).await()).also {
+                    (getFibonacciValueForNumberAsync(number - 1).await()
+                        .plus(getFibonacciValueForNumberAsync(number - 2).await())).also {
                         // Store calculated value to allow faster calculations
                         storageHelper.addCalculatedFibonacci(
                             CalculatedFibonacciEntity(

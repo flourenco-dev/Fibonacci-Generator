@@ -45,13 +45,15 @@ fun FirstFibonacciItem(fibonacciEntry: FibonacciEntry) {
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
             Text(
-                modifier = Modifier.constrainAs(fibonacciValue) {
-                    top.linkTo(orderNumber.bottom,8.dp)
-                    start.linkTo(parent.start, 8.dp)
-                    end.linkTo(parent.end, 8.dp)
-                    bottom.linkTo(parent.bottom, 8.dp)
-                },
-                text = "${fibonacciEntry.fibonacciValue}",
+                modifier = Modifier
+                    .fillMaxWidth(0.95f)
+                    .constrainAs(fibonacciValue) {
+                        top.linkTo(orderNumber.bottom, 8.dp)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        bottom.linkTo(parent.bottom, 8.dp)
+                    },
+                text = fibonacciEntry.fibonacciValue.toString(),
                 style = MaterialTheme.typography.headlineLarge,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
             )
