@@ -7,8 +7,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import com.flourenco.fibonacci.R
 import com.flourenco.fibonacci.model.FibonacciEntry
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.format.FormatStyle
@@ -40,7 +42,10 @@ fun FibonacciItem(fibonacciEntry: FibonacciEntry) {
                     top.linkTo(dateTime.bottom)
                     start.linkTo(parent.start, 16.dp)
                 },
-                text = "Fibonacci of order ${fibonacciEntry.orderNumber}:",
+                text = stringResource(
+                    R.string.fibonacci_item_order_text,
+                    fibonacciEntry.orderNumber
+                ),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurface
             )

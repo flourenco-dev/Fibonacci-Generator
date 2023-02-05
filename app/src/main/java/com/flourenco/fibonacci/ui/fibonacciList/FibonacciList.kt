@@ -24,8 +24,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.stringResource
 import androidx.constraintlayout.compose.ConstraintLayout
+import com.flourenco.fibonacci.R
 import com.flourenco.fibonacci.model.FibonacciEntry
 import com.flourenco.fibonacci.model.RequestNewFibonacciResult
 import com.flourenco.fibonacci.ui.FibonacciViewModel
@@ -38,6 +41,7 @@ fun FibonacciList(
     fibonacciEntryListState: State<List<FibonacciEntry>>
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
+    val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
     val showLoading = remember { mutableStateOf(false) }
@@ -46,7 +50,7 @@ fun FibonacciList(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = "Fibonacci generator")
+                    Text(text = stringResource(R.string.fibonacci_list_title))
                 }
             )
         },
@@ -60,13 +64,22 @@ fun FibonacciList(
                         scope.launch {
                             when (it) {
                                 RequestNewFibonacciResult.Success -> {
-                                    snackbarHostState.showSnackbar(message = "Success")
+                                    // Success will lead to a list update so no need to bother users
+                                    // with messages
                                 }
                                 RequestNewFibonacciResult.Failure -> {
-                                    snackbarHostState.showSnackbar(message = "Failure")
+                                    snackbarHostState.showSnackbar(
+                                        message = context.getString(
+                                            R.string.fibonacci_list_error_failure_message
+                                        )
+                                    )
                                 }
                                 RequestNewFibonacciResult.UnknownError -> {
-                                    snackbarHostState.showSnackbar(message = "UnknownError")
+                                    snackbarHostState.showSnackbar(
+                                        message = context.getString(
+                                            R.string.fibonacci_list_error_unknown_error_message
+                                        )
+                                    )
                                 }
                             }
                         }
@@ -110,7 +123,7 @@ fun FibonacciList(
                             end.linkTo(parent.end)
                             bottom.linkTo(parent.bottom)
                         },
-                    text = "No Fibonacci values calculated yet. Press the add (+) button to generate a new one",
+                    text = stringResource(R.string.fibonacci_list_empty_label),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onBackground
                 )

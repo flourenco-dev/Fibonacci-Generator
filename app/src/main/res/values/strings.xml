@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Fibonacci</string>
+    <string name="fibonacci_list_title">Fibonacci generator</string>
+    <string name="fibonacci_list_error_failure_message">Failure</string>
+    <string name="fibonacci_list_error_unknown_error_message">Unknown Error</string>
+    <string name="fibonacci_list_empty_label">No Fibonacci values calculated yet. Press the add (+) button to generate a new one</string>
+    <string name="fibonacci_item_latest_label">Latest</string>
+    <string name="fibonacci_item_order_text">Fibonacci of order %d:</string>
 </resources>
