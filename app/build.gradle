@@ -56,15 +56,16 @@ dependencies {
     implementation "androidx.compose.ui:ui:$composeVersion"
     implementation "androidx.compose.ui:ui-tooling-preview:$composeVersion"
     implementation "androidx.compose.runtime:runtime-livedata:$composeVersion"
+    implementation("androidx.constraintlayout:constraintlayout-compose:$composeConstraintLayoutVersion")
     debugImplementation "androidx.compose.ui:ui-tooling:$composeVersion"
 
     // Material 3 for Compose
-    implementation("androidx.compose.material3:material3:$composeMaterialVersion")
-    implementation("androidx.compose.material3:material3-window-size-class:$composeMaterialVersion")
+    implementation "androidx.compose.material3:material3:$composeMaterialVersion"
+    implementation "androidx.compose.material3:material3-window-size-class:$composeMaterialVersion"
 
     // Lifecycle
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
 
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"

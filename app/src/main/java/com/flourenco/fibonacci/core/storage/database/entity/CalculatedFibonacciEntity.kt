@@ -7,5 +7,5 @@ import org.threeten.bp.LocalDateTime
 @Entity
 data class CalculatedFibonacciEntity(
     @PrimaryKey val calculatedNumber: Int,
-    val fibonacciValue: Int
+    val fibonacciValue: Long
 )

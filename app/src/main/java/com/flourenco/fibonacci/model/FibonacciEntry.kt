@@ -4,6 +4,6 @@ import org.threeten.bp.LocalDateTime
 
 data class FibonacciEntry(
     val orderNumber: Int,
-    val fibonacciValue: Int,
+    val fibonacciValue: Long,
     val time: LocalDateTime
 )
